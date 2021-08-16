@@ -1,0 +1,23 @@
+body {
+    background-color: transparent!important;
+}
+
+.home {
+    background-image: url(http://artwiki.wikidot.com/local--files/creating-screentones/Screentone1.jpg);
+}
+
+.fullpage {
+    height: 100vh;
+}
+
+.dibujo {
+    display: block;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.invertir {
+    filter: invert(1);
+}
