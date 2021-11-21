@@ -3,7 +3,7 @@
 	license: MIT
 	http://www.jacklmoore.com/zoom
 */
-(function ($) {
+(function($) {
 	var defaults = {
 		url: false,
 		callback: false,
@@ -67,33 +67,32 @@
 
 				offset = $source.offset();
 			},
-			move: function (e) {
-				var left = (e.pageX - offset.left),
-					top = (e.pageY - offset.top);
+			move: function(e) {
+				var left = e.pageX - offset.left,
+					top = e.pageY - offset.top;
 
 				top = Math.max(Math.min(top, sourceHeight), 0);
 				left = Math.max(Math.min(left, sourceWidth), 0);
 
-				img.style.left = (left * -xRatio) + 'px';
-				img.style.top = (top * -yRatio) + 'px';
+				img.style.left = left * -xRatio + 'px';
+				img.style.top = top * -yRatio + 'px';
 			}
 		};
 	};
 
-	$.fn.zoom = function (options) {
-		return this.each(function () {
-			var
-			settings = $.extend({}, defaults, options || {}),
-			//target will display the zoomed image
-			target = settings.target && $(settings.target)[0] || this,
-			//source will provide zoom location info (thumbnail)
-			source = this,
-			$source = $(source),
-			img = document.createElement('img'),
-			$img = $(img),
-			mousemove = 'mousemove.zoom',
-			clicked = false,
-			touched = false;
+	$.fn.zoom = function(options) {
+		return this.each(function() {
+			var settings = $.extend({}, defaults, options || {}),
+				//target will display the zoomed image
+				target = (settings.target && $(settings.target)[0]) || this,
+				//source will provide zoom location info (thumbnail)
+				source = this,
+				$source = $(source),
+				img = document.createElement('img'),
+				$img = $(img),
+				mousemove = 'mousemove.zoom',
+				clicked = false,
+				touched = false;
 
 			// If a url wasn't specified, look for an image element.
 			if (!settings.url) {
@@ -106,15 +105,18 @@
 				}
 			}
 
-			$source.one('zoom.destroy', function(position, overflow){
-				$source.off(".zoom");
-				target.style.position = position;
-				target.style.overflow = overflow;
-				img.onload = null;
-				$img.remove();
-			}.bind(this, target.style.position, target.style.overflow));
+			$source.one(
+				'zoom.destroy',
+				function(position, overflow) {
+					$source.off('.zoom');
+					target.style.position = position;
+					target.style.overflow = overflow;
+					img.onload = null;
+					$img.remove();
+				}.bind(this, target.style.position, target.style.overflow)
+			);
 
-			img.onload = function () {
+			img.onload = function() {
 				var zoom = $.zoom(target, source, img, settings.magnify);
 
 				function start(e) {
@@ -123,40 +125,46 @@
 
 					// Skip the fade-in for IE8 and lower since it chokes on fading-in
 					// and changing position based on mousemovement at the same time.
-					$img.stop()
-					.fadeTo($.support.opacity ? settings.duration : 0, 1, $.isFunction(settings.onZoomIn) ? settings.onZoomIn.call(img) : false);
+					$img
+						.stop()
+						.fadeTo(
+							$.support.opacity ? settings.duration : 0,
+							1,
+							$.isFunction(settings.onZoomIn) ? settings.onZoomIn.call(img) : false
+						);
 				}
 
 				function stop() {
-					$img.stop()
-					.fadeTo(settings.duration, 0, $.isFunction(settings.onZoomOut) ? settings.onZoomOut.call(img) : false);
+					$img
+						.stop()
+						.fadeTo(
+							settings.duration,
+							0,
+							$.isFunction(settings.onZoomOut) ? settings.onZoomOut.call(img) : false
+						);
 				}
 
 				// Mouse events
 				if (settings.on === 'grab') {
-					$source
-						.on('mousedown.zoom',
-							function (e) {
-								if (e.which === 1) {
-									$(document).one('mouseup.zoom',
-										function () {
-											stop();
+					$source.on('mousedown.zoom', function(e) {
+						setTimeout(() => {
+							if (e.which === 1) {
+								$(document).one('mouseup.zoom', function() {
+									stop();
+									$(document).off(mousemove, zoom.move);
+								});
 
-											$(document).off(mousemove, zoom.move);
-										}
-									);
+								start(e);
 
-									start(e);
+								$(document).on(mousemove, zoom.move);
 
-									$(document).on(mousemove, zoom.move);
-
-									e.preventDefault();
-								}
+								e.preventDefault();
 							}
-						);
+						}, 1250);
+					});
 				} else if (settings.on === 'click') {
-					$source.on('click.zoom',
-						function (e) {
+					$source.on('click.zoom', function(e) {
+						setTimeout(() => {
 							if (clicked) {
 								// bubble the event up to the document to trigger the unbind.
 								return;
@@ -164,55 +172,51 @@
 								clicked = true;
 								start(e);
 								$(document).on(mousemove, zoom.move);
-								$(document).one('click.zoom',
-									function () {
-										stop();
-										clicked = false;
-										$(document).off(mousemove, zoom.move);
-									}
-								);
+								$(document).one('click.zoom', function() {
+									stop();
+									clicked = false;
+									$(document).off(mousemove, zoom.move);
+								});
 								return false;
 							}
-						}
-					);
+						}, 1250);
+					});
 				} else if (settings.on === 'toggle') {
-					$source.on('click.zoom',
-						function (e) {
-							if (clicked) {
-								stop();
-							} else {
-								start(e);
-							}
-							clicked = !clicked;
+					$source.on('click.zoom', function(e) {
+						if (clicked) {
+							stop();
+						} else {
+							start(e);
 						}
-					);
+						clicked = !clicked;
+					});
 				} else if (settings.on === 'mouseover') {
-					zoom.init(); // Preemptively call init because IE7 will fire the mousemove handler before the hover handler.
+					setTimeout(() => {
 
-					$source
-						.on('mouseenter.zoom', start)
-						.on('mouseleave.zoom', stop)
-						.on(mousemove, zoom.move);
+					zoom.init(); // Preemptively call init because IE7 will fire the mousemove handler before the hover handler.
+					$source.on('mouseenter.zoom', start).on('mouseleave.zoom', stop).on(mousemove, zoom.move);
+				}, 1250);
+
 				}
 
 				// Touch fallback
 				if (settings.touch) {
 					$source
-						.on('touchstart.zoom', function (e) {
+						.on('touchstart.zoom', function(e) {
 							e.preventDefault();
 							if (touched) {
 								touched = false;
 								stop();
 							} else {
 								touched = true;
-								start( e.originalEvent.touches[0] || e.originalEvent.changedTouches[0] );
+								start(e.originalEvent.touches[0] || e.originalEvent.changedTouches[0]);
 							}
 						})
-						.on('touchmove.zoom', function (e) {
+						.on('touchmove.zoom', function(e) {
 							e.preventDefault();
-							zoom.move( e.originalEvent.touches[0] || e.originalEvent.changedTouches[0] );
+							zoom.move(e.originalEvent.touches[0] || e.originalEvent.changedTouches[0]);
 						})
-						.on('touchend.zoom', function (e) {
+						.on('touchend.zoom', function(e) {
 							e.preventDefault();
 							if (touched) {
 								touched = false;
@@ -220,7 +224,7 @@
 							}
 						});
 				}
-				
+
 				if ($.isFunction(settings.callback)) {
 					settings.callback.call(img);
 				}
@@ -233,4 +237,4 @@
 	};
 
 	$.fn.zoom.defaults = defaults;
-}(window.jQuery));
+})(window.jQuery);
