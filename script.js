@@ -18,7 +18,7 @@ window.onload = function() {
 	myModal.addEventListener('shown.bs.modal', function() {
 		localStorage.setItem('noticed',true)
 	});
-	$('#image1').zoom({ on: 'toggle',duration:'1000' });
-	$('#image2').zoom({ on: 'toggle',duration:'500' });
-	$('#image3').zoom({ on: 'toggle',magnify: 2 });
+	$('#image1').zoom({ on: 'click',duration:'1000' });
+	$('#image2').zoom({ on: 'click',duration:'500' });
+	$('#image3').zoom({ on: 'click',magnify: 1.3 });
 };
