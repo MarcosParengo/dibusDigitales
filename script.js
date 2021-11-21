@@ -9,7 +9,9 @@ function invertir(id) {
 }
 
 window.onload = function() {
-    $('#cargando').addClass("oculto")
+
+    $('#body').addClass("loaded")
+	$('#cargando').addClass("oculto")
 	var myModal = document.getElementById('myModal')
     var noticed = localStorage.getItem('noticed');
 	if (noticed === null) {
