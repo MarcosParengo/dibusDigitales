@@ -43,14 +43,20 @@ window.onload = function() {
 		querySnapshot.forEach((doc) => {
 			contenedor.append(`
 			<div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left">
-                    <img onload="imageLoaded()" id=${doc.data()
-						.nombre} src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
+                <div  id=${doc.data()
+					.nombre} class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow zoom" data-aos="fade-up-left"
+                    data-aos-offset="300">
+                    <img   
+						src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
+						class="dibujo" alt=${doc.data().nombre} onload="imageLoaded()">
                 </div>
             </div>
             `);
+			$(`#${doc.data().nombre}`).zoom({
+				on: 'click',
+				magnify: doc.data().magnify,
+				duration: doc.data().duration
+			});
 		});
 	});
 };

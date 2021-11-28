@@ -40,17 +40,22 @@ window.onload = function() {
 
 	db.collection('dibujos').get().then((querySnapshot) => {
 		TotalImages = querySnapshot.size;
+		let documento = 0;
 		querySnapshot.forEach((doc) => {
+			console.log(documento % 3);
 			contenedor.append(`
-			<div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left">
-                    <img onload="imageLoaded()" id=${doc.data()
-						.nombre} src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
+			<div class="row fullpage my-5 d-flex align-items-center ">
+				<div class="col-12 px-0 d-flex justify-content-center dibujoParent" id=${doc.data().nombre} onclick="invertir(id)">
+          			<img 
+					  onload="imageLoaded()"
+					  src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
+					  class="dibujo animated ${documento % 3 === 2 ? 'offset2' : documento % 3 === 1 ? 'offset1' : ''}" 
+					  alt=${doc.data().nombre}
+					>
+        		</div>
+      		</div>
             `);
+			documento++;
 		});
 	});
 };

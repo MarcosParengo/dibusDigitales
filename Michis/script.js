@@ -2,6 +2,7 @@ let ImagesLoaded = 0;
 let TotalImages = 0;
 
 const imageLoaded = () => {
+	console.log("si")
 	ImagesLoaded++;
 	if (TotalImages === ImagesLoaded) {
 		$('#body').addClass('loaded');
@@ -17,15 +18,6 @@ const imageLoaded = () => {
 	}
 };
 
-function invertirYRotar(id) {
-	document.getElementById(id).classList.remove('invertir');
-	document.getElementById(id).classList.toggle('invertirYCambiarColor');
-	document.getElementById(id).classList.toggle('rotar3d');
-}
-
-function invertir(id) {
-	document.getElementById(id).classList.toggle('invertir');
-}
 let contenedor = $('#contenedor');
 
 window.onload = function() {
@@ -38,18 +30,19 @@ window.onload = function() {
 
 	var db = firebase.firestore();
 
-	db.collection('dibujos').get().then((querySnapshot) => {
+	db.collection('michis').get().then((querySnapshot) => {
 		TotalImages = querySnapshot.size;
 		querySnapshot.forEach((doc) => {
 			contenedor.append(`
-			<div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left">
-                    <img onload="imageLoaded()" id=${doc.data()
-						.nombre} src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
+			<div class="row fullpage my-5 d-flex align-items-center ">
+        		<div class="col-12 px-0 d-flex justify-content-center dibujoParent" data-aos="fade-up-left">
+          			<img 
+						onload="imageLoaded()" 
+						src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"
+						class="dibujo" alt="${doc.data().nombre}"
+					>
+        		</div>
+      		</div>
             `);
 		});
 	});

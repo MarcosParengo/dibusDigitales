@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/styles/styleSheet.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://kit.fontawesome.com/5e81f310cf.js" crossorigin="anonymous"></script>
 </head>
@@ -51,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav opacityGrow">
                         <li class="nav-item">
-                            <a class="nav-link" href="">Home</a>
+                            <a class="nav-link" href="/" >Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/Bocetos">Bocetos</a>
@@ -69,67 +68,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-right" data-aos-offset="100">
-                    <img id="6" src="http://drive.google.com/uc?export=view&id=1_Z3F2TU7RryVc6fem4OqWqcVco1wj5il"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left" data-aos-offset="100">
-                    <img id="1" src="http://drive.google.com/uc?export=view&id=10Z-vEvT-v7ZWBnA3k2GSPJ22q1UThg2x"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se ">
-                </div>
-            </div>
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-right" data-aos-offset="100">
-                    <img id="2" src="http://drive.google.com/uc?export=view&id=12Dgm1efIc8DlQa4dc3qYd6szJLqZOtZx"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left" data-aos-offset="100">
-                    <img id="8" src="http://drive.google.com/uc?export=view&id=1iUPzXTyDJMc7pDjfWfZNTAU_h22mlVNx"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-right" data-aos-offset="100">
-                    <img id="3" src="http://drive.google.com/uc?export=view&id=1EDlxf6TYeHDbIeyduUs2QYFD3SMG_Tco"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left" data-aos-offset="100">
-                    <img id="4" src="http://drive.google.com/uc?export=view&id=1F21-zdZCwrfEwr62dcwkl-d2Dgfz3HKH"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-            googleDrivePhotoId
-
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-left" data-aos-offset="100">
-                    <img id="5" src="http://drive.google.com/uc?export=view&id=1UBJ7qtqhrZPf9dTn12X5BFPnaN4mnCfR"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-
-            <div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto px-0 d-flex justify-content-center dibujoParent dropShadow "
-                    data-aos="fade-up-right" data-aos-offset="100">
-                    <img id="7" src="http://drive.google.com/uc?export=view&id=1c9EYkZ6-T3_stSdLdbPwSYw8iM9yuWoO"
-                        class="dibujo" onclick="invertirYRotar(id)" alt="no se">
-                </div>
-            </div>
-
+        <div class="container-fluid" id="contenedor">
         </div>
         <nav class="dropShadow navbar navbar-light bg-light footer">
             <div class="container">
@@ -146,6 +85,7 @@
             </div>
         </nav>
     </section>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.5.0/firebase-analytics.js";
@@ -173,7 +113,7 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4 "
         crossorigin="anonymous "></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js "></script>
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
