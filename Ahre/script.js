@@ -42,7 +42,6 @@ window.onload = function() {
 		TotalImages = querySnapshot.size;
 		let documento = 0;
 		querySnapshot.forEach((doc) => {
-			console.log(documento % 3);
 			contenedor.append(`
 			<div class="row fullpage my-5 d-flex align-items-center ">
 				<div class="col-12 px-0 d-flex justify-content-center dibujoParent" id=${doc.data().nombre} onclick="invertir(id)">
