@@ -40,7 +40,7 @@ window.onload = function() {
 
 	var db = firebase.firestore();
 
-	db.collection('bocetos').get().then((querySnapshot) => {
+		db.collection('bocetos').orderBy("nombre", "desc").get().then((querySnapshot) => {
 		TotalImages=querySnapshot.size
 		querySnapshot.forEach((doc) => {
 			contenedor.append(`
