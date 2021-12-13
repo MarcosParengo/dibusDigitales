@@ -43,7 +43,7 @@ window.onload = function() {
 		querySnapshot.forEach((doc) => {
 			contenedor.append(`
 			<div class="row fullpage my-5 d-flex align-items-center justify-content-center">
-                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent dropShadow "
+                <div class="col-auto  px-0 d-flex justify-content-center dibujoParent"
                     data-aos="fade-up-left">
                     <img onload="imageLoaded()" id=${doc.data()
 						.nombre} src="http://drive.google.com/uc?export=view&id=${doc.data().googleDrivePhotoId}"

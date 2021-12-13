@@ -1,7 +1,7 @@
 body {
 	background-color: transparent !important;
 	overflow-y: overlay;
-	background-image: url(http://artwiki.wikidot.com/local--files/creating-screentones/Screentone1.jpg);
+	background-image: url(https://doc-00-40-docs.googleusercontent.com/docs/securesc/ndko3ci6jrldi75otoo2iarp3ce5e3n5/gcbk3e9850eid7h6357cavbckf45o6je/1639410825000/12263346830398205214/09662843432140115364/1Hp3wZXSCI8eOVsqrW5KneFTYDHANmOb8?e=view&authuser=0);
 }
 
 ::-webkit-scrollbar {
@@ -35,16 +35,7 @@ body {
 	overflow: hidden;
 	transition: all 1s;
 }
-.dibujo {
-	display: block;
-	height: auto;
-	width: auto;
-	max-width: 100%;
-	max-height: 100vh;
-	transition: ease filter 1s, ease transform 1.5s;
-	padding: 1em;
-	border-radius: 30px;
-}
+
 .zoomImg {
 	pointer-events: none;
 }
@@ -65,6 +56,17 @@ body {
 .confidential {
 	font-size: 15px;
 }
+.dibujo {
+	display: block;
+	height: auto;
+	width: auto;
+	max-width: 100%;
+	max-height: 100vh;
+	transition: ease filter 1s, ease transform 1.5s;
+	padding: 1em;
+	border-radius: 30px;
+	filter: hue-rotate(90deg) invert(0) drop-shadow(0em 0em 0.5em white);
+}
 .dropShadow {
 	filter: drop-shadow(0px 0px 0.5em black);
 }
@@ -72,7 +74,7 @@ body {
 	filter: invert(1) drop-shadow(0em 0em 0.5em black);
 }
 .invertirYCambiarColor {
-	filter: hue-rotate(90deg) invert(1) drop-shadow(0em 0em 0.5em black);
+	filter: hue-rotate(90deg) invert(1) drop-shadow(0em 0em 0.5em white);
 }
 .rotar3d {
 	transform: rotate3d(1, 1, 1, 360deg);
